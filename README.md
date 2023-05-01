@@ -24,7 +24,9 @@ Running [main.py](https://github.com/renat0sn/QuintoAndar-WebScrapping/blob/main
 
 The program will work like this:
 
-.....
+<p>
+<img src="./docs/img/ezgif.com-video-to-gif.gif" width=1000>
+</p>
 
 ## :telephone_receiver: Contact
 E-mail: renato.sousa.gc@hotmail.com  &nbsp;&middot;&nbsp;

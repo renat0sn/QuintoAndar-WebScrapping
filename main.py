@@ -12,6 +12,10 @@ def main():
     driver.enter_page(URL)
 
     df_casas = pd.DataFrame()
+    # Scroll navigate configuration
+    element_scroll = driver.get_elements('div', 'class', 'sc-18lu2ht-0 bvIvXr')[0]
+    driver.driver.execute_script("arguments[0].style.overflow = 'visible';", element_scroll)
+    scroll_repeat_in_pixels = 250
 
     success = 0
     error = 0
@@ -36,20 +40,23 @@ def main():
             ver_mais_btn = driver.get_elements('button', 'aria-label', 'Ver mais')[0]
             time.sleep(1)
             driver.click_element(ver_mais_btn)
+            # Scroll until find "Ver mais" button
+            while True:
+                driver.driver.execute_script(f"arguments[0].scrollTop += {scroll_repeat_in_pixels}", element_scroll)
+                try:
+                    ver_mais_btn = driver.get_elements('button', 'aria-label', 'Ver mais')[0]
+                    time.sleep(1)
+                    driver.click_element(ver_mais_btn)
+                    break
+                except (StaleElementReferenceException, IndexError):
+                    continue
 
             success += 1
             print('Sucesso: ' + str(success) + ' | Casas encontradas: ' + str(df_temp.shape[0]) + ' | Total de casas: ' + str(df_casas.shape[0]))
             
         except:
             error += 1
-            print('Erro: ' + str(error))
-
-            try:
-                ver_mais_btn = driver.get_elements('button', 'aria-label', 'Ver mais')[0]
-                driver.click_element(ver_mais_btn)
-            except:
-                pass
-            continue
+            print('Erro: ' + str(error) + ' - ' + str(e))
 
 
 

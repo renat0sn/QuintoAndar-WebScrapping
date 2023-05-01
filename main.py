@@ -34,12 +34,12 @@ def main():
             df_temp = pd.DataFrame()
             df_temp['address'] = [house[0] for house in house_list_temp]
             df_temp['district'] = [house[1].split(', ')[0] for house in house_list_temp]
-            df_temp['area'] = [house[2].split(' • ')[0] for house in house_list_temp]
-            df_temp['bedrooms'] = [house[2].split(' • ')[1] for house in house_list_temp]
-            df_temp['garage'] = [house[2].split(' • ')[2] for house in house_list_temp]
+            df_temp['area'] = [house[2].split(' • ')[0].split(' m')[0] for house in house_list_temp]
+            df_temp['bedrooms'] = [house[2].split(' • ')[1].split(' q')[0] for house in house_list_temp]
+            df_temp['garage'] = [house[2].split(' • ')[2].split(' v')[0] for house in house_list_temp]
             df_temp['type'] = [house[2].split(' • ')[3] for house in house_list_temp]
-            df_temp['rent'] = [house[3].split('R$ ')[1] for house in house_list_temp]
-            df_temp['total'] = [house[4].split('R$ ')[1] for house in house_list_temp]
+            df_temp['rent'] = [house[3].split('R$ ')[1].replace('.', '') for house in house_list_temp]
+            df_temp['total'] = [house[4].split('R$ ')[1].replace('.', '') for house in house_list_temp]
 
             # Add the collected temporary dataframe to main dataframe
             df_properties = pd.concat([df_properties, df_temp]).reset_index(drop=True).drop_duplicates().reset_index(drop=True)

@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.edge.service import Service
-from selenium.webdriver.common.by import By
 from model.soup import SeleniumHandler
 
 class Driver:

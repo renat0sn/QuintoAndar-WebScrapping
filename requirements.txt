@@ -1,0 +1,2 @@
+pandas==1.5.3
+selenium==4.9.0
